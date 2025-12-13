@@ -4,191 +4,191 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Five Slash</title>
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow">
 
   <style>
-    :root{
-      /* Inspired by Image: Dark/Red/Black Luxury Theme */
-      --bg1: #101010;                     /* خلفية سوداء غنية */
-      --bg2: #000000;                     /* قاعدة أغمق */
-      --card: #222222;                    /* لون البطاقة/الخلفية العائمة */
-      --stroke: #404040;                  /* حدود رمادية داكنة */
-      --text: #f0f0f0;                    /* نص أبيض فاتح */
-      --muted: #a0a0a0;                   /* نص ثانوي رمادي متوسط */
-      --accent: #e74c3c;                  /* أحمر ساطع (Accent) */
-      --accent2: #c0392b;                 /* أحمر داكن */
-      --shadow: 0 10px 25px rgba(0,0,0,.65);
-      --radius: 12px;
-    }
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Kufi Arabic", sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 20% 15%, rgba(231, 76, 60,.18), transparent 60%),
-        radial-gradient(900px 500px at 85% 75%, rgba(192, 57, 43,.12), transparent 55%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
-      min-height:100vh;
-    }
-    .wrap{
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 18px 14px 40px;
-    }
-    .top{
-      margin-top: 10px;
-      border: 1px solid var(--stroke);
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-    .hero{
-      display: grid;
-      grid-template-columns: 100px 1fr;
-      gap: 16px;
-      padding: 20px;
-      align-items: center;
-      border-bottom: 1px solid var(--stroke);
-      background: rgba(255,255,255,.03); /* تباين خفيف للـ Hero */
-    }
-    .logo{
-      width: 90px;
-      height: 90px;
-      border-radius: 50%; /* شعار دائري احترافي */
-      background: var(--bg1);
-      border: 3px solid var(--accent); /* إطار بلون اللكنة */
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-      box-shadow: 0 0 15px rgba(231, 76, 60,.4);
-    }
-    .logo img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display:block;
-    }
-    .brand h1{
-      margin:0 0 4px;
-      font-size: 26px; /* حجم أكبر للعنوان */
-      font-weight: 900;
-      letter-spacing: .5px;
-      color: var(--accent);
-      text-shadow: 0 0 5px rgba(231, 76, 60,.5);
-    }
-    .brand p{
-      margin:0;
-      color:var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    .links{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 15px; /* تباعد أكبر بين الأزرار */
-      padding: 20px;
-    }
-    .btn{
-      text-decoration:none;
-      color: var(--text);
-      border: 1px solid var(--stroke);
-      background: var(--bg1);
-      padding: 16px 20px; /* حجم زر أكبر */
-      border-radius: 8px; /* حواف حادة */
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 10px;
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-    }
-    .btn:hover{
-      transform: translateY(-2px);
-      background: var(--accent2);
-      border-color: var(--accent);
-      color: #fff;
-      box-shadow: 0 8px 18px rgba(231, 76, 60,.4);
-    }
-    .left{
-      display:flex;
-      align-items:center;
-      gap: 16px;
-      min-width: 0;
-    }
-    .ico{
-      width: 48px;
-      height: 48px;
-      border-radius: 8px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      flex: 0 0 auto;
-      font-size: 20px;
-      background: var(--accent);
-      color: var(--text);
-      box-shadow: 0 2px 5px rgba(0,0,0,.3);
-    }
-    .btn:hover .ico {
-        background: var(--bg1);
-        border: 2px solid var(--text);
-    }
-    .label{
-      display:flex;
-      flex-direction: column;
-      min-width: 0;
-    }
-    .label b{
-      font-size: 17px;
-      font-weight: 700;
-      white-space: nowrap;
-      overflow:hidden;
-      text-overflow: ellipsis;
-    }
-    .label span{
-      font-size: 13px;
-      color: var(--muted);
-      white-space: nowrap;
-      overflow:hidden;
-      text-overflow: ellipsis;
-    }
-    .btn:hover .label span {
-        color: #fff; /* النص الثانوي يتغير للأبيض عند التحويم */
-    }
-    .arrow{ opacity:1; color: var(--accent); flex: 0 0 auto; font-weight: 700; font-size: 18px; }
-    .btn:hover .arrow {
-        color: #fff;
-    }
-    .foot{
-      text-align:center;
-      color: var(--muted);
-      font-size: 12px;
-      padding: 20px 4px 0;
-      opacity: .7;
-    }
+    :root{
+      /* Inspired by Image: Dark/Red/Black Luxury Theme */
+      --bg1: #101010;                     /* خلفية سوداء غنية */
+      --bg2: #000000;                     /* قاعدة أغمق */
+      --card: #222222;                    /* لون البطاقة/الخلفية العائمة */
+      --stroke: #404040;                  /* حدود رمادية داكنة */
+      --text: #f0f0f0;                    /* نص أبيض فاتح */
+      --muted: #a0a0a0;                   /* نص ثانوي رمادي متوسط */
+      --accent: #e74c3c;                  /* أحمر ساطع (Accent) */
+      --accent2: #c0392b;                 /* أحمر داكن */
+      --shadow: 0 10px 25px rgba(0,0,0,.65);
+      --radius: 12px;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Kufi Arabic", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 15%, rgba(231, 76, 60,.18), transparent 60%),
+        radial-gradient(900px 500px at 85% 75%, rgba(192, 57, 43,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+    }
+    .wrap{
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 18px 14px 40px;
+    }
+    .top{
+      margin-top: 10px;
+      border: 1px solid var(--stroke);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .hero{
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 16px;
+      padding: 20px;
+      align-items: center;
+      border-bottom: 1px solid var(--stroke);
+      background: rgba(255,255,255,.03); /* تباين خفيف للـ Hero */
+    }
+    .logo{
+      width: 100px;
+      height: 100px;
+      border-radius: 12px; /* حواف مستديرة (مربع) */
+      background: var(--bg1);
+      border: 3px solid var(--accent); /* إطار بلون اللكنة */
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      box-shadow: 0 0 15px rgba(231, 76, 60,.4);
+    }
+    .logo img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+    }
+    .brand h1{
+      margin:0 0 4px;
+      font-size: 26px; /* حجم أكبر للعنوان */
+      font-weight: 900;
+      letter-spacing: .5px;
+      color: var(--accent);
+      text-shadow: 0 0 5px rgba(231, 76, 60,.5);
+    }
+    .brand p{
+      margin:0;
+      color:var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .links{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 15px; /* تباعد أكبر بين الأزرار */
+      padding: 20px;
+    }
+    .btn{
+      text-decoration:none;
+      color: var(--text);
+      border: 1px solid var(--stroke);
+      background: var(--bg1);
+      padding: 16px 20px; /* حجم زر أكبر */
+      border-radius: 8px; /* حواف حادة */
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .btn:hover{
+      transform: translateY(-2px);
+      background: var(--accent2);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(231, 76, 60,.4);
+    }
+    .left{
+      display:flex;
+      align-items:center;
+      gap: 16px;
+      min-width: 0;
+    }
+    .ico{
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex: 0 0 auto;
+      font-size: 20px;
+      background: var(--accent);
+      color: var(--text);
+      box-shadow: 0 2px 5px rgba(0,0,0,.3);
+    }
+    .btn:hover .ico {
+        background: var(--bg1);
+        border: 2px solid var(--text);
+    }
+    .label{
+      display:flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .label b{
+      font-size: 17px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .label span{
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .btn:hover .label span {
+        color: #fff; /* النص الثانوي يتغير للأبيض عند التحويم */
+    }
+    .arrow{ opacity:1; color: var(--accent); flex: 0 0 auto; font-weight: 700; font-size: 18px; }
+    .btn:hover .arrow {
+        color: #fff;
+    }
+    .foot{
+      text-align:center;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 20px 4px 0;
+      opacity: .7;
+    }
 
-    @media (max-width: 480px) {
-      .hero {
-        grid-template-columns: 75px 1fr;
-        gap: 12px;
-        padding: 16px;
-      }
-      .logo {
-        width: 70px;
-        height: 70px;
-      }
-      .brand h1 {
-        font-size: 22px;
-      }
-      .ico {
-        width: 42px;
-        height: 42px;
-      }
-      .btn {
-        padding: 14px 16px;
-      }
-    }
+    @media (max-width: 480px) {
+      .hero {
+        grid-template-columns: 75px 1fr;
+        gap: 12px;
+        padding: 16px;
+      }
+      .logo {
+        width: 70px;
+        height: 70px;
+      }
+      .brand h1 {
+        font-size: 22px;
+      }
+      .ico {
+        width: 42px;
+        height: 42px;
+      }
+      .btn {
+        padding: 14px 16px;
+      }
+    }
   </style>
 </head>
 
@@ -199,7 +199,7 @@
       <div class="hero">
         <div class="logo">
           <img src="logo.jpg" alt="Five Slash Logo"
-               onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'color:rgba(241,241,245,.75);font-weight:700\'>LOGO</div>';">
+               onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'color:var(--text);font-weight:700; font-size: 16px;\'>F/S</div>';">
         </div>
 
         <div class="brand">
