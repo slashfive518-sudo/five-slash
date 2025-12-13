@@ -8,17 +8,17 @@
 
   <style>
     :root{
-      /* Professional Dark Mode (Charcoal & Cyan) */
-      --bg1: #0e1116;                     /* أسود/أزرق داكن (Charcoal) */
-      --bg2: #07090b;                     /* قاعدة أغمق */
-      --card: #1f252d;                    /* لون البطاقة/الخلفية العائمة */
-      --stroke: rgba(45, 55, 65, 1);      /* حدود رمادية داكنة واضحة */
-      --text: #e8ebf0;                    /* نص أبيض فاتح */
-      --muted: #9ba3ae;                   /* نص ثانوي رمادي متوسط */
-      --accent: #00bcd4;                  /* تركواز ساطع (Cyan) */
-      --accent2: #0097a7;                 /* تركواز داكن */
-      --shadow: 0 12px 30px rgba(0,0,0,.55);
-      --radius: 14px;                     /* تقليل انحناء الحواف قليلاً */
+      /* Inspired by Image: Dark/Red/Black Luxury Theme */
+      --bg1: #101010;                     /* خلفية سوداء غنية */
+      --bg2: #000000;                     /* قاعدة أغمق */
+      --card: #222222;                    /* لون البطاقة/الخلفية العائمة */
+      --stroke: #404040;                  /* حدود رمادية داكنة */
+      --text: #f0f0f0;                    /* نص أبيض فاتح */
+      --muted: #a0a0a0;                   /* نص ثانوي رمادي متوسط */
+      --accent: #e74c3c;                  /* أحمر ساطع (Accent) */
+      --accent2: #c0392b;                 /* أحمر داكن */
+      --shadow: 0 10px 25px rgba(0,0,0,.65);
+      --radius: 12px;
     }
     *{ box-sizing:border-box; }
     body{
@@ -26,8 +26,8 @@
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Kufi Arabic", sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1200px 600px at 20% 15%, rgba(0, 188, 212,.15), transparent 60%),
-        radial-gradient(900px 500px at 85% 75%, rgba(0, 151, 167,.10), transparent 55%),
+        radial-gradient(1200px 600px at 20% 15%, rgba(231, 76, 60,.18), transparent 60%),
+        radial-gradient(900px 500px at 85% 75%, rgba(192, 57, 43,.12), transparent 55%),
         linear-gradient(180deg, var(--bg1), var(--bg2));
       min-height:100vh;
     }
@@ -41,28 +41,29 @@
       border: 1px solid var(--stroke);
       background: var(--card);
       border-radius: var(--radius);
-      box-shadow: 0 8px 20px rgba(0,0,0,.4); /* ظل أنظف وأقل كثافة */
+      box-shadow: var(--shadow);
       overflow: hidden;
     }
     .hero{
       display: grid;
-      grid-template-columns: 100px 1fr; /* تصغير اللوغو قليلاً */
+      grid-template-columns: 100px 1fr;
       gap: 16px;
       padding: 20px;
       align-items: center;
-      border-bottom: 1px solid var(--stroke); /* إضافة فاصل نظيف */
+      border-bottom: 1px solid var(--stroke);
+      background: rgba(255,255,255,.03); /* تباين خفيف للـ Hero */
     }
     .logo{
       width: 90px;
       height: 90px;
-      border-radius: 20px;
+      border-radius: 50%; /* شعار دائري احترافي */
       background: var(--bg1);
-      border: 1px solid var(--stroke);
+      border: 3px solid var(--accent); /* إطار بلون اللكنة */
       display:flex;
       align-items:center;
       justify-content:center;
       overflow:hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,.3);
+      box-shadow: 0 0 15px rgba(231, 76, 60,.4);
     }
     .logo img{
       width: 100%;
@@ -72,10 +73,11 @@
     }
     .brand h1{
       margin:0 0 4px;
-      font-size: 24px; /* تكبير الخط قليلاً */
-      font-weight: 800; /* جعل العنوان أكثر جرأة */
-      letter-spacing: .2px;
-      color: var(--accent); /* لون اللكنة (Accent) */
+      font-size: 26px; /* حجم أكبر للعنوان */
+      font-weight: 900;
+      letter-spacing: .5px;
+      color: var(--accent);
+      text-shadow: 0 0 5px rgba(231, 76, 60,.5);
     }
     .brand p{
       margin:0;
@@ -86,16 +88,16 @@
     .links{
       display:grid;
       grid-template-columns: 1fr;
-      gap: 12px;
-      padding: 20px; /* زيادة التباعد حول الروابط */
+      gap: 15px; /* تباعد أكبر بين الأزرار */
+      padding: 20px;
     }
     .btn{
       text-decoration:none;
       color: var(--text);
       border: 1px solid var(--stroke);
-      background: var(--bg1); /* جعل خلفية الزر أغمق من الخلفية الرئيسية لتمييزه */
-      padding: 14px 18px; /* زيادة حجم الزر */
-      border-radius: 10px; /* تقليل استدارة الزر */
+      background: var(--bg1);
+      padding: 16px 20px; /* حجم زر أكبر */
+      border-radius: 8px; /* حواف حادة */
       display:flex;
       align-items:center;
       justify-content: space-between;
@@ -104,28 +106,33 @@
     }
     .btn:hover{
       transform: translateY(-2px);
-      background: var(--card);
-      border-color: var(--accent); /* إبراز الحدود بلون اللكنة عند التحويم */
-      box-shadow: 0 5px 15px rgba(0, 188, 212,.2);
+      background: var(--accent2);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(231, 76, 60,.4);
     }
     .left{
       display:flex;
       align-items:center;
-      gap: 14px; /* زيادة التباعد بين الأيقونة والنص */
+      gap: 16px;
       min-width: 0;
     }
     .ico{
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
       display:flex;
       align-items:center;
       justify-content:center;
       flex: 0 0 auto;
-      font-size: 18px;
-      background: var(--accent); /* أيقونة بارزة بلون اللكنة */
-      color: var(--bg1);
+      font-size: 20px;
+      background: var(--accent);
+      color: var(--text);
       box-shadow: 0 2px 5px rgba(0,0,0,.3);
+    }
+    .btn:hover .ico {
+        background: var(--bg1);
+        border: 2px solid var(--text);
     }
     .label{
       display:flex;
@@ -133,7 +140,7 @@
       min-width: 0;
     }
     .label b{
-      font-size: 16px; /* تكبير خط العنوان */
+      font-size: 17px;
       font-weight: 700;
       white-space: nowrap;
       overflow:hidden;
@@ -146,46 +153,40 @@
       overflow:hidden;
       text-overflow: ellipsis;
     }
-    .arrow{ opacity:1; color: var(--accent); flex: 0 0 auto; font-weight: 700; }
+    .btn:hover .label span {
+        color: #fff; /* النص الثانوي يتغير للأبيض عند التحويم */
+    }
+    .arrow{ opacity:1; color: var(--accent); flex: 0 0 auto; font-weight: 700; font-size: 18px; }
+    .btn:hover .arrow {
+        color: #fff;
+    }
     .foot{
       text-align:center;
       color: var(--muted);
       font-size: 12px;
       padding: 20px 4px 0;
-      opacity: .8;
-    }
-    .note{
-      margin-top: 15px;
-      padding: 12px 14px;
-      border: 1px solid var(--stroke);
-      background: var(--bg1);
-      border-radius: 10px;
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.8;
-      font-weight: 500;
+      opacity: .7;
     }
 
     @media (max-width: 480px) {
       .hero {
-        grid-template-columns: 80px 1fr;
+        grid-template-columns: 75px 1fr;
         gap: 12px;
         padding: 16px;
       }
       .logo {
         width: 70px;
         height: 70px;
-        border-radius: 16px;
       }
       .brand h1 {
-        font-size: 20px;
+        font-size: 22px;
       }
       .ico {
-        width: 38px;
-        height: 38px;
+        width: 42px;
+        height: 42px;
       }
       .btn {
-        padding: 12px 16px;
+        padding: 14px 16px;
       }
     }
   </style>
@@ -213,10 +214,10 @@
             <span class="ico">☕</span>
             <span class="label">
               <b>Menu</b>
-              <span>فتح القائمة</span>
+              <span>فتح القائمة الرقمية</span>
             </span>
           </span>
-          <span class="arrow">↗</span>
+          <span class="arrow">→</span>
         </a>
 
                 <a class="btn" href="https://maps.app.goo.gl/7Gqx9Bhf5zLsPdoG7" target="_blank" rel="noopener">
@@ -227,7 +228,7 @@
               <span>فتح الموقع على Google Maps</span>
             </span>
             </span>
-          <span class="arrow">↗</span>
+          <span class="arrow">→</span>
         </a>
 
                 <a class="btn" href="https://www.tiktok.com/@five.slash5?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">
@@ -235,15 +236,12 @@
             <span class="ico">🎵</span>
             <span class="label">
               <b>TikTok</b>
-              <span>@five.slash5</span>
+              <span>تابعنا على تيك توك</span>
             </span>
           </span>
-          <span class="arrow">↗</span>
+          <span class="arrow">→</span>
         </a>
 
-                <div class="note">
-          ملاحظة: هذه الصفحة ثابتة وآمنة (Static). لا يمكن لأي أحد تعديلها إلا من يملك حساب GitHub/الاستضافة.
-        </div>
       </div>
     </div>
 
