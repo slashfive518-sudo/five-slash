@@ -1,150 +1,289 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Five Slash</title>
-  <meta name="robots" content="index, follow">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Five Slash</title>
+  <meta name="robots" content="index, follow" />
 
-  <style>
+  <style>
     :root{
-      /* Inspired by Image: Dark/Red/Black Luxury Theme */
-      --bg1: #101010;                     /* خلفية سوداء غنية */
-      --bg2: #000000;                     /* قاعدة أغمق */
-      --card: #222222;                    /* لون البطاقة/الخلفية العائمة */
-      --stroke: #404040;                  /* حدود رمادية داكنة */
-      --text: #f0f0f0;                    /* نص أبيض فاتح */
-      --muted: #a0a0a0;                   /* نص ثانوي رمادي متوسط */
-      --accent: #e74c3c;                  /* أحمر ساطع (Accent) */
-      --accent2: #c0392b;                 /* أحمر داكن */
-      --shadow: 0 10px 25px rgba(0,0,0,.65);
-      --radius: 12px;
+      --bg0:#060607;
+      --bg1:#0b0b0f;
+      --bg2:#0f1016;
+
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.03);
+      --stroke: rgba(255,255,255,.12);
+      --stroke2: rgba(231,76,60,.28);
+
+      --text:#f5f6fb;
+      --muted: rgba(245,246,251,.70);
+
+      --accent:#ff3d2e;
+      --accent2:#ff6a3d;
+
+      --shadow: 0 18px 45px rgba(0,0,0,.65);
+      --radius: 18px;
     }
+
     *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Kufi Arabic", sans-serif;
-      color:var(--text);
+      color: var(--text);
       background:
-        radial-gradient(1200px 600px at 20% 15%, rgba(231, 76, 60,.18), transparent 60%),
-        radial-gradient(900px 500px at 85% 75%, rgba(192, 57, 43,.12), transparent 55%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
-      min-height:100vh;
+        radial-gradient(900px 520px at 18% 14%, rgba(255,61,46,.22), transparent 60%),
+        radial-gradient(900px 520px at 82% 80%, rgba(255,106,61,.14), transparent 58%),
+        radial-gradient(700px 420px at 55% 28%, rgba(255,255,255,.06), transparent 55%),
+        linear-gradient(180deg, var(--bg2), var(--bg0));
+      overflow-x:hidden;
     }
+
+    /* subtle moving grain */
+    body:before{
+      content:"";
+      position:fixed;
+      inset:-40px;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity:.08;
+      pointer-events:none;
+      transform: translate3d(0,0,0);
+      animation: grain 10s steps(6) infinite;
+    }
+    @keyframes grain{
+      0%{ transform: translate(0,0); }
+      20%{ transform: translate(-4%, 3%); }
+      40%{ transform: translate(3%, -2%); }
+      60%{ transform: translate(-2%, -4%); }
+      80%{ transform: translate(4%, 2%); }
+      100%{ transform: translate(0,0); }
+    }
+
     .wrap{
-      max-width: 760px;
+      max-width: 840px;
       margin: 0 auto;
-      padding: 18px 14px 40px;
+      padding: 22px 14px 44px;
     }
-    .top{
-      margin-top: 10px;
-      border: 1px solid var(--stroke);
-      background: var(--card);
-      border-radius: var(--radius);
+
+    .shell{
+      position:relative;
+      border-radius: calc(var(--radius) + 8px);
+      padding: 14px;
+      background: linear-gradient(135deg, rgba(255,61,46,.14), rgba(255,255,255,.05), rgba(255,106,61,.10));
       box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-    .hero{
-      display: grid;
-      grid-template-columns: 100px 1fr;
-      gap: 16px;
-      padding: 20px;
-      align-items: center;
-      border-bottom: 1px solid var(--stroke);
-      background: rgba(255,255,255,.03); /* تباين خفيف للـ Hero */
-    }
-    .logo{
-      width: 90px;
-      height: 90px;
-      border-radius: 50%; /* شعار دائري احترافي */
-      background: var(--bg1);
-      border: 3px solid var(--accent); /* إطار بلون اللكنة */
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      border: 1px solid rgba(255,255,255,.10);
       overflow:hidden;
-      box-shadow: 0 0 15px rgba(231, 76, 60,.4);
     }
-    .logo img{
+    .shell:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(800px 380px at 15% 10%, rgba(255,61,46,.20), transparent 60%),
+        radial-gradient(700px 360px at 85% 90%, rgba(255,106,61,.16), transparent 58%);
+      filter: blur(6px);
+      opacity:.75;
+      pointer-events:none;
+    }
+
+    .card{
+      position:relative;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border: 1px solid var(--stroke);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      overflow:hidden;
+    }
+
+    /* Header */
+    .hero{
+      display:grid;
+      grid-template-columns: 120px 1fr;
+      gap: 18px;
+      padding: 22px 22px 18px;
+      align-items:center;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(600px 220px at 20% 20%, rgba(255,61,46,.18), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.04), transparent);
+    }
+
+    .logoRing{
+      width: 104px;
+      height: 104px;
+      border-radius: 999px;
+      display:grid;
+      place-items:center;
+      background: linear-gradient(135deg, rgba(255,61,46,.9), rgba(255,106,61,.85));
+      padding: 3px;
+      box-shadow: 0 12px 30px rgba(255,61,46,.25);
+      position:relative;
+    }
+    .logoRing:after{
+      content:"";
+      position:absolute;
+      inset:-10px;
+      border-radius:999px;
+      background: radial-gradient(circle, rgba(255,61,46,.22), transparent 60%);
+      filter: blur(2px);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .logoRingInner{
+      width: 100%;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(10,10,12,.92), rgba(10,10,12,.65));
+      border: 1px solid rgba(255,255,255,.10);
+      overflow:hidden;
+      position:relative;
+      display:grid;
+      place-items:center;
+    }
+
+    .logoRingInner img{
       width: 100%;
       height: 100%;
       object-fit: cover;
       display:block;
+      transform: scale(1.02);
     }
+
+    /* shine sweep */
+    .logoRingInner:before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.16) 50%, transparent 60%);
+      transform: translateX(-60%) rotate(12deg);
+      animation: shine 4.5s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes shine{
+      0%{ transform: translateX(-70%) rotate(12deg); opacity:.0; }
+      20%{ opacity:.55; }
+      50%{ transform: translateX(50%) rotate(12deg); opacity:.45; }
+      80%{ opacity:.0; }
+      100%{ transform: translateX(70%) rotate(12deg); opacity:.0; }
+    }
+
     .brand h1{
-      margin:0 0 4px;
-      font-size: 26px; /* حجم أكبر للعنوان */
+      margin: 0 0 6px;
+      font-size: 30px;
       font-weight: 900;
-      letter-spacing: .5px;
-      color: var(--accent);
-      text-shadow: 0 0 5px rgba(231, 76, 60,.5);
+      letter-spacing: .4px;
+      line-height: 1.1;
+      background: linear-gradient(90deg, var(--text), rgba(255,255,255,.85), rgba(255,255,255,.60));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
     .brand p{
       margin:0;
-      color:var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.8;
     }
+
+    .badges{
+      margin-top: 12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+    }
+    .badge{
+      font-size: 12px;
+      color: rgba(245,246,251,.85);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding: 7px 10px;
+      border-radius: 999px;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      backdrop-filter: blur(10px);
+    }
+    .dot{
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 4px rgba(255,61,46,.12);
+    }
+
+    /* Buttons grid */
     .links{
       display:grid;
-      grid-template-columns: 1fr;
-      gap: 15px; /* تباعد أكبر بين الأزرار */
-      padding: 20px;
+      gap: 14px;
+      padding: 18px 18px 20px;
     }
     .btn{
       text-decoration:none;
       color: var(--text);
-      border: 1px solid var(--stroke);
-      background: var(--bg1);
-      padding: 16px 20px; /* حجم زر أكبر */
-      border-radius: 8px; /* حواف حادة */
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      padding: 16px 16px;
+      border-radius: 16px;
       display:flex;
       align-items:center;
       justify-content: space-between;
-      gap: 10px;
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      gap: 12px;
+      position:relative;
+      overflow:hidden;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+    }
+    .btn:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(300px 180px at 10% 50%, rgba(255,61,46,.18), transparent 60%);
+      opacity:.0;
+      transition: opacity .16s ease;
+      pointer-events:none;
     }
     .btn:hover{
       transform: translateY(-2px);
-      background: var(--accent2);
-      border-color: var(--accent);
-      color: #fff;
-      box-shadow: 0 8px 18px rgba(231, 76, 60,.4);
+      border-color: rgba(255,61,46,.35);
+      box-shadow: 0 14px 32px rgba(0,0,0,.45);
     }
+    .btn:hover:before{ opacity:1; }
+
     .left{
       display:flex;
       align-items:center;
-      gap: 16px;
+      gap: 14px;
       min-width: 0;
     }
+
     .ico{
-      width: 48px;
-      height: 48px;
-      border-radius: 8px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display:grid;
+      place-items:center;
       flex: 0 0 auto;
-      font-size: 20px;
-      background: var(--accent);
-      color: var(--text);
-      box-shadow: 0 2px 5px rgba(0,0,0,.3);
+      font-size: 22px;
+      background: linear-gradient(135deg, rgba(255,61,46,.95), rgba(255,106,61,.85));
+      box-shadow: 0 10px 24px rgba(255,61,46,.18);
+      border: 1px solid rgba(255,255,255,.14);
     }
-    .btn:hover .ico {
-        background: var(--bg1);
-        border: 2px solid var(--text);
-    }
+
     .label{
       display:flex;
       flex-direction: column;
       min-width: 0;
     }
     .label b{
-      font-size: 17px;
-      font-weight: 700;
+      font-size: 16.5px;
+      font-weight: 800;
       white-space: nowrap;
       overflow:hidden;
       text-overflow: ellipsis;
+      margin-bottom: 2px;
     }
     .label span{
       font-size: 13px;
@@ -153,103 +292,141 @@
       overflow:hidden;
       text-overflow: ellipsis;
     }
-    .btn:hover .label span {
-        color: #fff; /* النص الثانوي يتغير للأبيض عند التحويم */
+
+    .meta{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      flex: 0 0 auto;
     }
-    .arrow{ opacity:1; color: var(--accent); flex: 0 0 auto; font-weight: 700; font-size: 18px; }
-    .btn:hover .arrow {
-        color: #fff;
-    }
-    .foot{
-      text-align:center;
-      color: var(--muted);
+    .pill{
       font-size: 12px;
-      padding: 20px 4px 0;
-      opacity: .7;
+      color: rgba(245,246,251,.9);
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+    }
+    .arrow{
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      display:grid;
+      place-items:center;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      font-weight: 900;
+      color: rgba(245,246,251,.92);
+      transition: transform .16s ease, background .16s ease, border-color .16s ease;
+    }
+    .btn:hover .arrow{
+      transform: translateX(-2px);
+      background: rgba(255,61,46,.18);
+      border-color: rgba(255,61,46,.35);
     }
 
-    @media (max-width: 480px) {
-      .hero {
-        grid-template-columns: 75px 1fr;
-        gap: 12px;
-        padding: 16px;
-      }
-      .logo {
-        width: 70px;
-        height: 70px;
-      }
-      .brand h1 {
-        font-size: 22px;
-      }
-      .ico {
-        width: 42px;
-        height: 42px;
-      }
-      .btn {
-        padding: 14px 16px;
-      }
+    .foot{
+      text-align:center;
+      color: rgba(245,246,251,.60);
+      font-size: 12px;
+      padding: 16px 6px 0;
     }
-  </style>
+
+    /* Responsive */
+    @media (max-width: 520px){
+      .hero{
+        grid-template-columns: 92px 1fr;
+        padding: 18px 16px 14px;
+        gap: 14px;
+      }
+      .logoRing{ width: 84px; height: 84px; }
+      .brand h1{ font-size: 24px; }
+      .links{ padding: 14px; }
+      .ico{ width: 48px; height: 48px; border-radius: 14px; }
+      .arrow{ width: 38px; height: 38px; border-radius: 13px; }
+    }
+  </style>
 </head>
 
 <body>
-  <div class="wrap">
+  <div class="wrap">
+    <div class="shell">
+      <div class="card">
+        <div class="hero">
+          <div class="logoRing" aria-label="Logo">
+            <div class="logoRingInner" id="logoBox">
+              <img
+                src="logo.jpg"
+                alt="Five Slash Logo"
+                onerror="this.remove(); document.getElementById('logoBox').innerHTML = '<div style=&quot;font-weight:900;letter-spacing:.6px;color:rgba(245,246,251,.85);font-size:14px;text-align:center;line-height:1.2;padding:10px;&quot;>FIVE<br>SLASH</div>';"
+              />
+            </div>
+          </div>
 
-    <div class="top">
-      <div class="hero">
-        <div class="logo">
-          <img src="logo.jpg" alt="Five Slash Logo"
-               onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'color:rgba(241,241,245,.75);font-weight:700\'>LOGO</div>';">
-        </div>
+          <div class="brand">
+            <h1>Five Slash</h1>
+            <p>افتح المنيو، تابعنا، ووصلنا بسهولة بتجربة فخمة وسريعة.</p>
 
-        <div class="brand">
-          <h1>Five Slash</h1>
-          <p>افتح المنيو، تابعنا، ووصلنا بسهولة.</p>
-        </div>
-      </div>
+            <div class="badges">
+              <span class="badge"><span class="dot"></span>Menu QR</span>
+              <span class="badge"><span class="dot"></span>Google Maps</span>
+              <span class="badge"><span class="dot"></span>TikTok</span>
+            </div>
+          </div>
+        </div>
 
-      <div class="links">
-                <a class="btn" href="https://slashfive518-sudo.github.io/menu/index.html" target="_blank" rel="noopener">
-          <span class="left">
-            <span class="ico">☕</span>
-            <span class="label">
-              <b>Menu</b>
-              <span>فتح القائمة الرقمية</span>
-            </span>
-          </span>
-          <span class="arrow">→</span>
-        </a>
+        <div class="links">
+          <a class="btn" href="https://slashfive518-sudo.github.io/menu/index.html" target="_blank" rel="noopener">
+            <span class="left">
+              <span class="ico">☕</span>
+              <span class="label">
+                <b>Menu</b>
+                <span>فتح القائمة الرقمية</span>
+              </span>
+            </span>
+            <span class="meta">
+              <span class="pill">Open</span>
+              <span class="arrow">←</span>
+            </span>
+          </a>
 
-                <a class="btn" href="https://maps.app.goo.gl/7Gqx9Bhf5zLsPdoG7" target="_blank" rel="noopener">
-          <span class="left">
-            <span class="ico">📍</span>
-            <span class="label">
-              <b>Location</b>
-              <span>فتح الموقع على Google Maps</span>
-            </span>
-            </span>
-          <span class="arrow">→</span>
-        </a>
+          <a class="btn" href="https://maps.app.goo.gl/7Gqx9Bhf5zLsPdoG7" target="_blank" rel="noopener">
+            <span class="left">
+              <span class="ico">📍</span>
+              <span class="label">
+                <b>Location</b>
+                <span>فتح الموقع على Google Maps</span>
+              </span>
+            </span>
+            <span class="meta">
+              <span class="pill">Map</span>
+              <span class="arrow">←</span>
+            </span>
+          </a>
 
-                <a class="btn" href="https://www.tiktok.com/@five.slash5?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">
-          <span class="left">
-            <span class="ico">🎵</span>
-            <span class="label">
-              <b>TikTok</b>
-              <span>تابعنا على تيك توك</span>
-            </span>
-          </span>
-          <span class="arrow">→</span>
-        </a>
+          <a class="btn" href="https://www.tiktok.com/@five.slash5?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">
+            <span class="left">
+              <span class="ico">🎵</span>
+              <span class="label">
+                <b>TikTok</b>
+                <span>تابعنا على تيك توك</span>
+              </span>
+            </span>
+            <span class="meta">
+              <span class="pill">Follow</span>
+              <span class="arrow">←</span>
+            </span>
+          </a>
+        </div>
+      </div>
 
-      </div>
-    </div>
+      <div class="foot">© <span id="y"></span> Five Slash</div>
+    </div>
+  </div>
 
-    <div class="foot">© <span id="y"></span> Five Slash</div>
-  </div>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
