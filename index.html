@@ -1,268 +1,881 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Five Slash</title>
-  <meta name="robots" content="index, follow">
-
-  <style>
-    :root{
-      /* Professional Dark Mode (Charcoal & Cyan) */
-      --bg1: #0e1116;                     /* أسود/أزرق داكن (Charcoal) */
-      --bg2: #07090b;                     /* قاعدة أغمق */
-      --card: #1f252d;                    /* لون البطاقة/الخلفية العائمة */
-      --stroke: rgba(45, 55, 65, 1);      /* حدود رمادية داكنة واضحة */
-      --text: #e8ebf0;                    /* نص أبيض فاتح */
-      --muted: #9ba3ae;                   /* نص ثانوي رمادي متوسط */
-      --accent: #00bcd4;                  /* تركواز ساطع (Cyan) */
-      --accent2: #0097a7;                 /* تركواز داكن */
-      --shadow: 0 12px 30px rgba(0,0,0,.55);
-      --radius: 14px;                     /* تقليل انحناء الحواف قليلاً */
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Five Slash | كافية ومطعم</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* ===== VARIABLES ===== */
+    :root {
+      /* Colors */
+      --primary: #8B5CF6;
+      --primary-light: #A78BFA;
+      --primary-dark: #7C3AED;
+      --secondary: #10B981;
+      --secondary-light: #34D399;
+      --accent: #F59E0B;
+      --accent-light: #FBBF24;
+      
+      --bg-dark: #0A0A0F;
+      --bg-card: #151522;
+      --bg-surface: #1E1E2E;
+      --bg-hover: rgba(255, 255, 255, 0.05);
+      
+      --text-primary: #FFFFFF;
+      --text-secondary: #D1D5DB;
+      --text-muted: #9CA3AF;
+      
+      --border: rgba(255, 255, 255, 0.1);
+      --border-light: rgba(255, 255, 255, 0.05);
+      --border-glow: rgba(139, 92, 246, 0.3);
+      
+      /* Gradients */
+      --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      --gradient-dark: linear-gradient(135deg, var(--bg-dark) 0%, #1E1B4B 100%);
+      --gradient-card: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+      --gradient-overlay: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 100%);
+      
+      /* Shadows */
+      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.15);
+      --shadow-glow: 0 0 30px rgba(139, 92, 246, 0.3);
+      
+      /* Border Radius */
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --radius-full: 9999px;
+      
+      /* Transitions */
+      --transition-fast: 0.2s ease;
+      --transition-normal: 0.3s ease;
+      --transition-slow: 0.5s ease;
+      
+      /* Spacing */
+      --space-xs: 8px;
+      --space-sm: 16px;
+      --space-md: 24px;
+      --space-lg: 32px;
+      --space-xl: 48px;
+      --space-2xl: 64px;
     }
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Kufi Arabic", sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 20% 15%, rgba(0, 188, 212,.15), transparent 60%),
-        radial-gradient(900px 500px at 85% 75%, rgba(0, 151, 167,.10), transparent 55%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
-      min-height:100vh;
+    
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .wrap{
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 18px 14px 40px;
+    
+    body {
+      font-family: 'Segoe UI', 'Noto Sans Arabic', system-ui, -apple-system, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    .top{
-      margin-top: 10px;
-      border: 1px solid var(--stroke);
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: 0 8px 20px rgba(0,0,0,.4); /* ظل أنظف وأقل كثافة */
-      overflow: hidden;
+    
+    ::selection {
+      background: var(--primary);
+      color: white;
     }
-    .hero{
-      display: grid;
-      grid-template-columns: 100px 1fr; /* تصغير اللوغو قليلاً */
-      gap: 16px;
-      padding: 20px;
-      align-items: center;
-      border-bottom: 1px solid var(--stroke); /* إضافة فاصل نظيف */
-    }
-    .logo{
-      width: 90px;
-      height: 90px;
-      border-radius: 20px;
-      background: var(--bg1);
-      border: 1px solid var(--stroke);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,.3);
-    }
-    .logo img{
+    
+    /* ===== BACKGROUND EFFECTS ===== */
+    .bg-effects {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      display:block;
+      z-index: -1;
+      overflow: hidden;
     }
-    .brand h1{
-      margin:0 0 4px;
-      font-size: 24px; /* تكبير الخط قليلاً */
-      font-weight: 800; /* جعل العنوان أكثر جرأة */
-      letter-spacing: .2px;
-      color: var(--accent); /* لون اللكنة (Accent) */
+    
+    .gradient-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 40% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 40%);
+      filter: blur(60px);
     }
-    .brand p{
-      margin:0;
-      color:var(--muted);
-      font-size: 14px;
+    
+    .floating-shapes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--primary);
+      opacity: 0.05;
+      filter: blur(40px);
+      animation: float 15s infinite ease-in-out;
+    }
+    
+    .shape:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      top: 10%;
+      right: 10%;
+      background: var(--primary);
+      animation-delay: 0s;
+    }
+    
+    .shape:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      top: 60%;
+      left: 10%;
+      background: var(--secondary);
+      animation-delay: 5s;
+    }
+    
+    .shape:nth-child(3) {
+      width: 150px;
+      height: 150px;
+      bottom: 20%;
+      right: 20%;
+      background: var(--accent);
+      animation-delay: 10s;
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+      }
+    }
+    
+    /* ===== CONTAINER ===== */
+    .container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: var(--space-md);
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* ===== HEADER ===== */
+    .main-header {
+      margin-top: var(--space-lg);
+      margin-bottom: var(--space-xl);
+    }
+    
+    /* Logo Card */
+    .logo-card {
+      background: rgba(21, 21, 34, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .logo-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gradient-primary);
+    }
+    
+    .hero-content {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+    }
+    
+    .logo-container {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      flex-shrink: 0;
+    }
+    
+    .logo-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: var(--radius-lg);
+      background: var(--gradient-card);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .logo-circle::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 2px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+    
+    .logo-img {
+      width: 80%;
+      height: 80%;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+    
+    .logo-fallback {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .brand-info {
+      flex: 1;
+    }
+    
+    .brand-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: var(--space-sm);
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+    
+    .brand-description {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: var(--space-md);
+    }
+    
+    .stats {
+      display: flex;
+      gap: var(--space-lg);
+      margin-top: var(--space-md);
+    }
+    
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+    
+    /* ===== LINKS GRID ===== */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+    
+    .link-card {
+      background: rgba(21, 21, 34, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      transition: all var(--transition-normal);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    
+    .link-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      opacity: 0;
+      transition: opacity var(--transition-normal);
+      z-index: 0;
+    }
+    
+    .link-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--border-glow);
+      box-shadow: var(--shadow-glow);
+    }
+    
+    .link-card:hover::before {
+      opacity: 0.1;
+    }
+    
+    .card-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    
+    .card-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      transition: all var(--transition-normal);
+    }
+    
+    .link-card:hover .card-icon {
+      background: var(--gradient-primary);
+      transform: scale(1.1);
+      color: white;
+    }
+    
+    .card-text {
+      flex: 1;
+    }
+    
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .card-arrow {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      transition: transform var(--transition-normal);
+    }
+    
+    .link-card:hover .card-arrow {
+      transform: translateX(-5px);
+      color: var(--primary);
+    }
+    
+    .card-description {
+      font-size: 0.875rem;
+      color: var(--text-muted);
       line-height: 1.6;
     }
-    .links{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      padding: 20px; /* زيادة التباعد حول الروابط */
+    
+    /* Special card for menu */
+    .menu-card {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(16, 185, 129, 0.05));
+      border: 1px solid rgba(139, 92, 246, 0.2);
     }
-    .btn{
-      text-decoration:none;
-      color: var(--text);
-      border: 1px solid var(--stroke);
-      background: var(--bg1); /* جعل خلفية الزر أغمق من الخلفية الرئيسية لتمييزه */
-      padding: 14px 18px; /* زيادة حجم الزر */
-      border-radius: 10px; /* تقليل استدارة الزر */
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 10px;
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    
+    .menu-card .card-icon {
+      background: var(--gradient-primary);
+      color: white;
     }
-    .btn:hover{
-      transform: translateY(-2px);
-      background: var(--card);
-      border-color: var(--accent); /* إبراز الحدود بلون اللكنة عند التحويم */
-      box-shadow: 0 5px 15px rgba(0, 188, 212,.2);
+    
+    /* ===== SOCIAL BAR ===== */
+    .social-bar {
+      background: rgba(21, 21, 34, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-md);
+      margin-bottom: var(--space-lg);
     }
-    .left{
-      display:flex;
-      align-items:center;
-      gap: 14px; /* زيادة التباعد بين الأيقونة والنص */
-      min-width: 0;
+    
+    .social-title {
+      text-align: center;
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: var(--space-md);
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
-    .ico{
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      flex: 0 0 auto;
-      font-size: 18px;
-      background: var(--accent); /* أيقونة بارزة بلون اللكنة */
-      color: var(--bg1);
-      box-shadow: 0 2px 5px rgba(0,0,0,.3);
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-md);
     }
-    .label{
-      display:flex;
-      flex-direction: column;
-      min-width: 0;
+    
+    .social-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      font-size: 1.25rem;
+      transition: all var(--transition-normal);
+      text-decoration: none;
     }
-    .label b{
-      font-size: 16px; /* تكبير خط العنوان */
-      font-weight: 700;
-      white-space: nowrap;
-      overflow:hidden;
-      text-overflow: ellipsis;
+    
+    .social-icon:hover {
+      transform: translateY(-4px);
+      background: var(--gradient-primary);
+      box-shadow: var(--shadow-glow);
     }
-    .label span{
-      font-size: 13px;
-      color: var(--muted);
-      white-space: nowrap;
-      overflow:hidden;
-      text-overflow: ellipsis;
+    
+    .social-icon.instagram:hover { background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D); }
+    .social-icon.tiktok:hover { background: #000000; }
+    .social-icon.maps:hover { background: #34A853; }
+    .social-icon.whatsapp:hover { background: #25D366; }
+    
+    /* ===== FOOTER ===== */
+    .main-footer {
+      text-align: center;
+      padding: var(--space-lg) 0;
+      border-top: 1px solid var(--border-light);
+      margin-top: var(--space-xl);
     }
-    .arrow{ opacity:1; color: var(--accent); flex: 0 0 auto; font-weight: 700; }
-    .foot{
-      text-align:center;
-      color: var(--muted);
-      font-size: 12px;
-      padding: 20px 4px 0;
-      opacity: .8;
+    
+    .footer-text {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      margin-bottom: var(--space-sm);
     }
-    .note{
-      margin-top: 15px;
-      padding: 12px 14px;
-      border: 1px solid var(--stroke);
-      background: var(--bg1);
-      border-radius: 10px;
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.8;
-      font-weight: 500;
+    
+    .copyright {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      opacity: 0.7;
     }
-
+    
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate-in {
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    .delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .delay-2 { animation-delay: 0.2s; opacity: 0; }
+    .delay-3 { animation-delay: 0.3s; opacity: 0; }
+    .delay-4 { animation-delay: 0.4s; opacity: 0; }
+    .delay-5 { animation-delay: 0.5s; opacity: 0; }
+    
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .container {
+        padding: var(--space-sm);
+      }
+      
+      .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-md);
+      }
+      
+      .stats {
+        justify-content: center;
+      }
+      
+      .links-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .brand-title {
+        font-size: 2rem;
+      }
+      
+      .logo-container {
+        width: 100px;
+        height: 100px;
+      }
+    }
+    
     @media (max-width: 480px) {
-      .hero {
-        grid-template-columns: 80px 1fr;
-        gap: 12px;
-        padding: 16px;
+      .logo-card,
+      .link-card,
+      .social-bar {
+        padding: var(--space-md);
       }
-      .logo {
-        width: 70px;
-        height: 70px;
-        border-radius: 16px;
+      
+      .brand-title {
+        font-size: 1.75rem;
       }
-      .brand h1 {
-        font-size: 20px;
+      
+      .social-icons {
+        flex-wrap: wrap;
       }
-      .ico {
-        width: 38px;
-        height: 38px;
-      }
-      .btn {
-        padding: 12px 16px;
+      
+      .card-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
       }
     }
-  </style>
+    
+    /* ===== UTILITY ===== */
+    .text-center {
+      text-align: center;
+    }
+    
+    .mt-1 { margin-top: var(--space-xs); }
+    .mt-2 { margin-top: var(--space-sm); }
+    .mt-3 { margin-top: var(--space-md); }
+    .mt-4 { margin-top: var(--space-lg); }
+    .mt-5 { margin-top: var(--space-xl); }
+    
+    .mb-1 { margin-bottom: var(--space-xs); }
+    .mb-2 { margin-bottom: var(--space-sm); }
+    .mb-3 { margin-bottom: var(--space-md); }
+    .mb-4 { margin-bottom: var(--space-lg); }
+    .mb-5 { margin-bottom: var(--space-xl); }
+  </style>
 </head>
 
 <body>
-  <div class="wrap">
+  <!-- Background Effects -->
+  <div class="bg-effects">
+    <div class="gradient-bg"></div>
+    <div class="floating-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+  </div>
 
-    <div class="top">
-      <div class="hero">
-        <div class="logo">
-          <img src="logo.jpg" alt="Five Slash Logo"
-               onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'color:rgba(241,241,245,.75);font-weight:700\'>LOGO</div>';">
-        </div>
+  <div class="container">
+    <!-- Header -->
+    <header class="main-header animate-in">
+      <div class="logo-card">
+        <div class="hero-content">
+          <div class="logo-container">
+            <div class="logo-circle">
+              <img src="logo.jpg" alt="Five Slash Logo" class="logo-img" 
+                   onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\"logo-fallback\">5/</div>'">
+            </div>
+          </div>
+          
+          <div class="brand-info">
+            <h1 class="brand-title">Five Slash</h1>
+            <p class="brand-description">
+              وجهتك الأولى لأجواء استثنائية وقهوة مميزة. افتح المنيو، تابعنا على وسائل التواصل، وزرنا في موقعنا المميز.
+            </p>
+            
+            <div class="stats">
+              <div class="stat-item">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">متاحون لك</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">مشروب مميز</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">⭐ 4.9</span>
+                <span class="stat-label">تقييم العملاء</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
 
-        <div class="brand">
-          <h1>Five Slash</h1>
-          <p>افتح المنيو، تابعنا، ووصلنا بسهولة.</p>
-        </div>
-      </div>
+    <!-- Main Links -->
+    <main class="links-grid">
+      <!-- Menu Card -->
+      <a href="http://185.193.17.193/five-slash-menu/index.php?key=FIVE2025" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         class="link-card menu-card animate-in delay-1">
+        <div class="card-content">
+          <div class="card-icon">
+            <i class="fas fa-coffee"></i>
+          </div>
+          <div class="card-text">
+            <div class="card-title">
+              قائمة الطعام والمشروبات
+              <span class="card-arrow"><i class="fas fa-arrow-left"></i></span>
+            </div>
+            <p class="card-description">
+              استعرض قائمتنا الكاملة من المشروبات الساخنة والباردة، الحلويات، والأطباق المميزة. اطلب بسهولة عبر QR Code
+            </p>
+          </div>
+        </div>
+      </a>
 
-      <div class="links">
-                <a class="btn" href="http://185.193.17.193/five-slash-menu/index.php?key=FIVE2025" target="_blank" rel="noopener">
-          <span class="left">
-            <span class="ico">☕</span>
-            <span class="label">
-              <b>Menu</b>
-              <span>فتح القائمة</span>
-            </span>
-          </span>
-          <span class="arrow">↗</span>
-        </a>
+      <!-- Location Card -->
+      <a href="https://maps.app.goo.gl/7Gqx9Bhf5zLsPdoG7" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         class="link-card animate-in delay-2">
+        <div class="card-content">
+          <div class="card-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="card-text">
+            <div class="card-title">
+              موقعنا على الخريطة
+              <span class="card-arrow"><i class="fas fa-arrow-left"></i></span>
+            </div>
+            <p class="card-description">
+              افتح موقعنا على خرائط جوجل، احصل على الاتجاهات، واعرف أقرب طريق للوصول إلينا
+            </p>
+          </div>
+        </div>
+      </a>
 
-                <a class="btn" href="https://maps.app.goo.gl/7Gqx9Bhf5zLsPdoG7" target="_blank" rel="noopener">
-          <span class="left">
-            <span class="ico">📍</span>
-            <span class="label">
-              <b>Location</b>
-              <span>فتح الموقع على Google Maps</span>
-            </span>
-            </span>
-          <span class="arrow">↗</span>
-        </a>
+      <!-- TikTok Card -->
+      <a href="https://www.tiktok.com/@five.slash5" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         class="link-card animate-in delay-3">
+        <div class="card-content">
+          <div class="card-icon">
+            <i class="fab fa-tiktok"></i>
+          </div>
+          <div class="card-text">
+            <div class="card-title">
+              تيك توك
+              <span class="card-arrow"><i class="fas fa-arrow-left"></i></span>
+            </div>
+            <p class="card-description">
+              تابعنا على تيك توك لمقاطع فيديو حصرية، عروض خاصة، ووراء الكواليس @five.slash5
+            </p>
+          </div>
+        </div>
+      </a>
 
-                <a class="btn" href="https://www.tiktok.com/@five.slash5?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">
-          <span class="left">
-            <span class="ico">🎵</span>
-            <span class="label">
-              <b>TikTok</b>
-              <span>@five.slash5</span>
-            </span>
-          </span>
-          <span class="arrow">↗</span>
-        </a>
+      <!-- Instagram Card -->
+      <a href="#" 
+         onclick="event.preventDefault(); showComingSoon('Instagram');"
+         class="link-card animate-in delay-4">
+        <div class="card-content">
+          <div class="card-icon">
+            <i class="fab fa-instagram"></i>
+          </div>
+          <div class="card-text">
+            <div class="card-title">
+              إنستجرام
+              <span class="card-arrow"><i class="fas fa-arrow-left"></i></span>
+            </div>
+            <p class="card-description">
+              قريباً على إنستجرام. تابعنا لصور حصرية، قصص يومية، وعروض خاصة
+            </p>
+          </div>
+        </div>
+      </a>
 
-                <a class="btn" href="#" onclick="alert('ضع رابط Instagram هنا ثم احذف هذا التنبيه.'); return false;">
-          <span class="left">
-            <span class="ico">📷</span>
-            <span class="label">
-              <b>Instagram</b>
-              <span>ضع رابط الإنستجرام</span>
-            </span>
-          </span>
-          <span class="arrow">↗</span>
-        </a>
+      <!-- WhatsApp Card -->
+      <a href="#" 
+         onclick="event.preventDefault(); openWhatsApp();"
+         class="link-card animate-in delay-5">
+        <div class="card-content">
+          <div class="card-icon">
+            <i class="fab fa-whatsapp"></i>
+          </div>
+          <div class="card-text">
+            <div class="card-title">
+              تواصل معنا
+              <span class="card-arrow"><i class="fas fa-arrow-left"></i></span>
+            </div>
+            <p class="card-description">
+              للاستفسارات، الحجوزات، أو أي مساعدة. اضغط هنا للتواصل معنا عبر واتساب
+            </p>
+          </div>
+        </div>
+      </a>
+    </main>
 
-        <div class="note">
-          ملاحظة: هذه الصفحة ثابتة وآمنة (Static). لا يمكن لأي أحد تعديلها إلا من يملك حساب GitHub/الاستضافة.
-        </div>
-      </div>
-    </div>
+    <!-- Social Bar -->
+    <div class="social-bar animate-in delay-4">
+      <h3 class="social-title">تابعنا على</h3>
+      <div class="social-icons">
+        <a href="http://185.193.17.193/five-slash-menu/index.php?key=FIVE2025" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="social-icon">
+          <i class="fas fa-utensils"></i>
+        </a>
+        <a href="https://maps.app.goo.gl/7Gqx9Bhf5zLsPdoG7" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="social-icon maps">
+          <i class="fas fa-map-marked-alt"></i>
+        </a>
+        <a href="https://www.tiktok.com/@five.slash5" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="social-icon tiktok">
+          <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="#" 
+           onclick="event.preventDefault(); showComingSoon('Instagram');"
+           class="social-icon instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="#" 
+           onclick="event.preventDefault(); openWhatsApp();"
+           class="social-icon whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </div>
+    </div>
 
-    <div class="foot">© <span id="y"></span> Five Slash</div>
-  </div>
+    <!-- Footer -->
+    <footer class="main-footer animate-in">
+      <p class="footer-text">
+        Five Slash | تجربة قهوة استثنائية في كل كوب
+      </p>
+      <p class="copyright">
+        © <span id="current-year"></span> Five Slash. جميع الحقوق محفوظة.
+      </p>
+    </footer>
+  </div>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <script>
+    // Set current year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // WhatsApp function
+    function openWhatsApp() {
+      const phone = "966500000000"; // بدون +
+      const message = encodeURIComponent("السلام عليكم، أريد الاستفسار عن Five Slash");
+      window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+    }
+    
+    // Coming soon alert
+    function showComingSoon(platform) {
+      const alertDiv = document.createElement('div');
+      alertDiv.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(21, 21, 34, 0.95);
+        backdrop-filter: blur(20px);
+        border: 2px solid var(--primary);
+        border-radius: 20px;
+        padding: 30px;
+        z-index: 10000;
+        text-align: center;
+        max-width: 90%;
+        width: 400px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        animation: fadeIn 0.3s ease;
+      `;
+      
+      alertDiv.innerHTML = `
+        <i class="fas fa-clock" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
+        <h3 style="margin-bottom: 15px; color: var(--text-primary);">قريباً على ${platform}</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.6;">
+          نحن نعمل على ${platform} وسنكون متاحين قريباً. تابعنا على تيك توك للحصول على آخر التحديثات.
+        </p>
+        <button onclick="this.parentElement.remove()" style="
+          background: var(--primary);
+          color: white;
+          border: none;
+          padding: 12px 30px;
+          border-radius: 50px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          حسناً
+        </button>
+      `;
+      
+      document.body.appendChild(alertDiv);
+      
+      // Add overlay
+      const overlay = document.createElement('div');
+      overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        backdrop-filter: blur(5px);
+        z-index: 9999;
+        animation: fadeIn 0.3s ease;
+      `;
+      overlay.onclick = function() {
+        document.body.removeChild(alertDiv);
+        document.body.removeChild(overlay);
+      };
+      document.body.appendChild(overlay);
+    }
+    
+    // Add hover effects to cards
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.link-card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-8px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0)';
+        });
+      });
+      
+      // Add loading animation
+      setTimeout(() => {
+        document.querySelectorAll('.animate-in').forEach(el => {
+          el.style.opacity = '1';
+        });
+      }, 100);
+    });
+  </script>
 </body>
 </html>
