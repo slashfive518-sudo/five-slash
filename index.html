@@ -1,12 +1,268 @@
-<!-- حذف هذا القسم بالكامل -->
-<section class="info-section animate-in delay-5">
-  <div class="info-card">
-    <div class="info-header">
-      <i class="fas fa-info-circle info-icon"></i>
-      <h3 class="info-title">معلومات هامة</h3>
-    </div>
-    <p class="info-text">
-      ... المحتوى ...
-    </p>
-  </div>
-</section>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Five Slash</title>
+  <meta name="robots" content="index, follow">
+
+  <style>
+    :root{
+      /* Professional Dark Mode (Charcoal & Cyan) */
+      --bg1: #0e1116;                     /* أسود/أزرق داكن (Charcoal) */
+      --bg2: #07090b;                     /* قاعدة أغمق */
+      --card: #1f252d;                    /* لون البطاقة/الخلفية العائمة */
+      --stroke: rgba(45, 55, 65, 1);      /* حدود رمادية داكنة واضحة */
+      --text: #e8ebf0;                    /* نص أبيض فاتح */
+      --muted: #9ba3ae;                   /* نص ثانوي رمادي متوسط */
+      --accent: #00bcd4;                  /* تركواز ساطع (Cyan) */
+      --accent2: #0097a7;                 /* تركواز داكن */
+      --shadow: 0 12px 30px rgba(0,0,0,.55);
+      --radius: 14px;                     /* تقليل انحناء الحواف قليلاً */
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Kufi Arabic", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 15%, rgba(0, 188, 212,.15), transparent 60%),
+        radial-gradient(900px 500px at 85% 75%, rgba(0, 151, 167,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+    }
+    .wrap{
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 18px 14px 40px;
+    }
+    .top{
+      margin-top: 10px;
+      border: 1px solid var(--stroke);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 20px rgba(0,0,0,.4); /* ظل أنظف وأقل كثافة */
+      overflow: hidden;
+    }
+    .hero{
+      display: grid;
+      grid-template-columns: 100px 1fr; /* تصغير اللوغو قليلاً */
+      gap: 16px;
+      padding: 20px;
+      align-items: center;
+      border-bottom: 1px solid var(--stroke); /* إضافة فاصل نظيف */
+    }
+    .logo{
+      width: 90px;
+      height: 90px;
+      border-radius: 20px;
+      background: var(--bg1);
+      border: 1px solid var(--stroke);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,.3);
+    }
+    .logo img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+    }
+    .brand h1{
+      margin:0 0 4px;
+      font-size: 24px; /* تكبير الخط قليلاً */
+      font-weight: 800; /* جعل العنوان أكثر جرأة */
+      letter-spacing: .2px;
+      color: var(--accent); /* لون اللكنة (Accent) */
+    }
+    .brand p{
+      margin:0;
+      color:var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .links{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding: 20px; /* زيادة التباعد حول الروابط */
+    }
+    .btn{
+      text-decoration:none;
+      color: var(--text);
+      border: 1px solid var(--stroke);
+      background: var(--bg1); /* جعل خلفية الزر أغمق من الخلفية الرئيسية لتمييزه */
+      padding: 14px 18px; /* زيادة حجم الزر */
+      border-radius: 10px; /* تقليل استدارة الزر */
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .btn:hover{
+      transform: translateY(-2px);
+      background: var(--card);
+      border-color: var(--accent); /* إبراز الحدود بلون اللكنة عند التحويم */
+      box-shadow: 0 5px 15px rgba(0, 188, 212,.2);
+    }
+    .left{
+      display:flex;
+      align-items:center;
+      gap: 14px; /* زيادة التباعد بين الأيقونة والنص */
+      min-width: 0;
+    }
+    .ico{
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex: 0 0 auto;
+      font-size: 18px;
+      background: var(--accent); /* أيقونة بارزة بلون اللكنة */
+      color: var(--bg1);
+      box-shadow: 0 2px 5px rgba(0,0,0,.3);
+    }
+    .label{
+      display:flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .label b{
+      font-size: 16px; /* تكبير خط العنوان */
+      font-weight: 700;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .label span{
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .arrow{ opacity:1; color: var(--accent); flex: 0 0 auto; font-weight: 700; }
+    .foot{
+      text-align:center;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 20px 4px 0;
+      opacity: .8;
+    }
+    .note{
+      margin-top: 15px;
+      padding: 12px 14px;
+      border: 1px solid var(--stroke);
+      background: var(--bg1);
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.8;
+      font-weight: 500;
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        grid-template-columns: 80px 1fr;
+        gap: 12px;
+        padding: 16px;
+      }
+      .logo {
+        width: 70px;
+        height: 70px;
+        border-radius: 16px;
+      }
+      .brand h1 {
+        font-size: 20px;
+      }
+      .ico {
+        width: 38px;
+        height: 38px;
+      }
+      .btn {
+        padding: 12px 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="top">
+      <div class="hero">
+        <div class="logo">
+          <img src="logo.jpg" alt="Five Slash Logo"
+               onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'color:rgba(241,241,245,.75);font-weight:700\'>LOGO</div>';">
+        </div>
+
+        <div class="brand">
+          <h1>Five Slash</h1>
+          <p>افتح المنيو، تابعنا، ووصلنا بسهولة.</p>
+        </div>
+      </div>
+
+      <div class="links">
+                <a class="btn" href="http://185.193.17.193/five-slash-menu/index.php?key=FIVE2025" target="_blank" rel="noopener">
+          <span class="left">
+            <span class="ico">☕</span>
+            <span class="label">
+              <b>Menu</b>
+              <span>فتح القائمة</span>
+            </span>
+          </span>
+          <span class="arrow">↗</span>
+        </a>
+
+                <a class="btn" href="https://maps.app.goo.gl/7Gqx9Bhf5zLsPdoG7" target="_blank" rel="noopener">
+          <span class="left">
+            <span class="ico">📍</span>
+            <span class="label">
+              <b>Location</b>
+              <span>فتح الموقع على Google Maps</span>
+            </span>
+            </span>
+          <span class="arrow">↗</span>
+        </a>
+
+                <a class="btn" href="https://www.tiktok.com/@five.slash5?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">
+          <span class="left">
+            <span class="ico">🎵</span>
+            <span class="label">
+              <b>TikTok</b>
+              <span>@five.slash5</span>
+            </span>
+          </span>
+          <span class="arrow">↗</span>
+        </a>
+
+                <a class="btn" href="#" onclick="alert('ضع رابط Instagram هنا ثم احذف هذا التنبيه.'); return false;">
+          <span class="left">
+            <span class="ico">📷</span>
+            <span class="label">
+              <b>Instagram</b>
+              <span>ضع رابط الإنستجرام</span>
+            </span>
+          </span>
+          <span class="arrow">↗</span>
+        </a>
+
+        <div class="note">
+          ملاحظة: هذه الصفحة ثابتة وآمنة (Static). لا يمكن لأي أحد تعديلها إلا من يملك حساب GitHub/الاستضافة.
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">© <span id="y"></span> Five Slash</div>
+  </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
