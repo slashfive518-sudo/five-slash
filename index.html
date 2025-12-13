@@ -1,1084 +1,257 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Five Slash | كافية ومطعم</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <style>
-    /* ===== VARIABLES - THEME 1 (DEFAULT: MODERN DARK) ===== */
-    :root {
-      /* Theme Colors - Dark Modern */
-      --primary: #8B5CF6;
-      --primary-light: #A78BFA;
-      --primary-dark: #7C3AED;
-      --secondary: #10B981;
-      --secondary-light: #34D399;
-      --accent: #F59E0B;
-      --accent-light: #FBBF24;
-      
-      --bg-dark: #0A0A0F;
-      --bg-card: rgba(21, 21, 34, 0.8);
-      --bg-surface: #1E1E2E;
-      --bg-hover: rgba(255, 255, 255, 0.05);
-      
-      --text-primary: #FFFFFF;
-      --text-secondary: #D1D5DB;
-      --text-muted: #9CA3AF;
-      
-      --border: rgba(255, 255, 255, 0.1);
-      --border-light: rgba(255, 255, 255, 0.05);
-      --border-glow: rgba(139, 92, 246, 0.3);
-      
-      /* Theme Name */
-      --theme-name: "الداكن العصري";
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Five Slash</title>
+  <meta name="robots" content="index, follow">
+
+  <style>
+    :root{
+      /* Professional Dark Mode (Charcoal & Cyan) */
+      --bg1: #0e1116;                     /* أسود/أزرق داكن (Charcoal) */
+      --bg2: #07090b;                     /* قاعدة أغمق */
+      --card: #1f252d;                    /* لون البطاقة/الخلفية العائمة */
+      --stroke: rgba(45, 55, 65, 1);      /* حدود رمادية داكنة واضحة */
+      --text: #e8ebf0;                    /* نص أبيض فاتح */
+      --muted: #9ba3ae;                   /* نص ثانوي رمادي متوسط */
+      --accent: #00bcd4;                  /* تركواز ساطع (Cyan) */
+      --accent2: #0097a7;                 /* تركواز داكن */
+      --shadow: 0 12px 30px rgba(0,0,0,.55);
+      --radius: 14px;                     /* تقليل انحناء الحواف قليلاً */
     }
-    
-    /* ===== THEME 2: LIGHT & CLEAN ===== */
-    .theme-light {
-      --primary: #7C3AED;
-      --primary-light: #8B5CF6;
-      --primary-dark: #6D28D9;
-      --secondary: #059669;
-      --secondary-light: #10B981;
-      --accent: #D97706;
-      --accent-light: #F59E0B;
-      
-      --bg-dark: #F8FAFC;
-      --bg-card: rgba(255, 255, 255, 0.9);
-      --bg-surface: #F1F5F9;
-      --bg-hover: rgba(0, 0, 0, 0.05);
-      
-      --text-primary: #1E293B;
-      --text-secondary: #475569;
-      --text-muted: #64748B;
-      
-      --border: rgba(0, 0, 0, 0.1);
-      --border-light: rgba(0, 0, 0, 0.05);
-      --border-glow: rgba(124, 58, 237, 0.2);
-      
-      --theme-name: "الفاتح النظيف";
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Kufi Arabic", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 15%, rgba(0, 188, 212,.15), transparent 60%),
+        radial-gradient(900px 500px at 85% 75%, rgba(0, 151, 167,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
     }
-    
-    /* ===== THEME 3: MINIMAL BLACK & GOLD ===== */
-    .theme-gold {
-      --primary: #D4AF37;
-      --primary-light: #E5C158;
-      --primary-dark: #B8941F;
-      --secondary: #1A1A1A;
-      --secondary-light: #2D2D2D;
-      --accent: #C0C0C0;
-      --accent-light: #E0E0E0;
-      
-      --bg-dark: #0F0F0F;
-      --bg-card: rgba(26, 26, 26, 0.9);
-      --bg-surface: #1A1A1A;
-      --bg-hover: rgba(212, 175, 55, 0.1);
-      
-      --text-primary: #FFFFFF;
-      --text-secondary: #E5E5E5;
-      --text-muted: #A0A0A0;
-      
-      --border: rgba(212, 175, 55, 0.2);
-      --border-light: rgba(212, 175, 55, 0.1);
-      --border-glow: rgba(212, 175, 55, 0.3);
-      
-      --theme-name: "الأسود والذهبي";
-    }
-    
-    /* ===== THEME 4: BLUE GRADIENT ===== */
-    .theme-blue {
-      --primary: #3B82F6;
-      --primary-light: #60A5FA;
-      --primary-dark: #2563EB;
-      --secondary: #06B6D4;
-      --secondary-light: #22D3EE;
-      --accent: #8B5CF6;
-      --accent-light: #A78BFA;
-      
-      --bg-dark: #0F172A;
-      --bg-card: rgba(30, 41, 59, 0.9);
-      --bg-surface: #1E293B;
-      --bg-hover: rgba(59, 130, 246, 0.1);
-      
-      --text-primary: #F1F5F9;
-      --text-secondary: #CBD5E1;
-      --text-muted: #94A3B8;
-      
-      --border: rgba(59, 130, 246, 0.2);
-      --border-light: rgba(59, 130, 246, 0.1);
-      --border-glow: rgba(59, 130, 246, 0.3);
-      
-      --theme-name: "التدرج الأزرق";
-    }
-    
-    /* ===== RESET & BASE ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Segoe UI', 'Noto Sans Arabic', system-ui, -apple-system, sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-primary);
-      min-height: 100vh;
-      line-height: 1.6;
-      overflow-x: hidden;
-      transition: background-color 0.5s ease, color 0.5s ease;
-    }
-    
-    ::selection {
-      background: var(--primary);
-      color: white;
-    }
-    
-    /* ===== BACKGROUND EFFECTS ===== */
-    .bg-effects {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-      opacity: 0.7;
-    }
-    
-    .gradient-bg {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 20% 30%, rgba(var(--primary-rgb, 139, 92, 246), 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(var(--secondary-rgb, 16, 185, 129), 0.1) 0%, transparent 40%),
-        radial-gradient(circle at 40% 80%, rgba(var(--accent-rgb, 245, 158, 11), 0.1) 0%, transparent 40%);
-      filter: blur(60px);
-      transition: all 0.5s ease;
-    }
-    
-    /* ===== THEME SWITCHER ===== */
-    .theme-switcher {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
-    }
-    
-    .theme-toggle {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: var(--bg-card);
-      border: 2px solid var(--border);
-      color: var(--text-primary);
-      font-size: 1.2rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-    
-    .theme-toggle:hover {
-      transform: rotate(45deg);
-      background: var(--primary);
-      color: white;
-    }
-    
-    .theme-menu {
-      position: absolute;
-      top: 60px;
-      left: 0;
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 12px;
-      min-width: 180px;
-      display: none;
-      flex-direction: column;
-      gap: 8px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    }
-    
-    .theme-menu.show {
-      display: flex;
-    }
-    
-    .theme-option {
-      padding: 10px 12px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-    
-    .theme-option:hover {
-      background: var(--bg-hover);
-    }
-    
-    .theme-option.active {
-      background: var(--primary);
-      color: white;
-    }
-    
-    .theme-color {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-    }
-    
-    .theme-color.default { background: linear-gradient(135deg, #8B5CF6, #10B981); }
-    .theme-color.light { background: linear-gradient(135deg, #7C3AED, #059669); }
-    .theme-color.gold { background: linear-gradient(135deg, #D4AF37, #1A1A1A); }
-    .theme-color.blue { background: linear-gradient(135deg, #3B82F6, #06B6D4); }
-    
-    /* ===== CONTAINER ===== */
-    .container {
-      width: 100%;
-      max-width: 800px;
+    .wrap{
+      max-width: 760px;
       margin: 0 auto;
-      padding: var(--space-md);
-      position: relative;
-      z-index: 1;
+      padding: 18px 14px 40px;
     }
-    
-    /* ===== HEADER ===== */
-    .main-header {
-      margin-top: var(--space-lg);
-      margin-bottom: var(--space-xl);
-    }
-    
-    /* Logo Card */
-    .logo-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-lg);
-      box-shadow: var(--shadow-lg);
-      position: relative;
+    .top{
+      margin-top: 10px;
+      border: 1px solid var(--stroke);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 20px rgba(0,0,0,.4); /* ظل أنظف وأقل كثافة */
       overflow: hidden;
-      transition: all 0.5s ease;
     }
-    
-    .logo-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      transition: all 0.5s ease;
-    }
-    
-    .hero-content {
-      display: flex;
-      align-items: center;
-      gap: var(--space-lg);
-    }
-    
-    /* Improved Logo Container */
-    .logo-container {
-      position: relative;
-      width: 140px;
-      height: 140px;
-      flex-shrink: 0;
-    }
-    
-    .logo-circle {
-      width: 100%;
-      height: 100%;
-      border-radius: var(--radius-lg);
-      background: var(--gradient-card);
-      border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-      transition: all 0.5s ease;
-    }
-    
-    .logo-circle::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 2px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      transition: all 0.5s ease;
-    }
-    
-    /* Logo Image Options */
-    .logo-img {
-      width: 80%;
-      height: 80%;
-      object-fit: contain;
-      border-radius: 12px;
-      transition: all 0.5s ease;
-    }
-    
-    .logo-img.cover {
-      object-fit: cover;
-    }
-    
-    .logo-img.contain {
-      object-fit: contain;
-    }
-    
-    .logo-img.none {
-      object-fit: none;
-    }
-    
-    /* Logo Controls */
-    .logo-controls {
-      position: absolute;
-      bottom: -10px;
-      right: 50%;
-      transform: translateX(50%);
-      display: flex;
-      gap: 8px;
-      background: var(--bg-card);
-      padding: 6px 12px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      z-index: 2;
-    }
-    
-    .logo-btn {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      color: var(--text-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .logo-btn:hover {
-      background: var(--primary);
-      color: white;
-      transform: scale(1.1);
-    }
-    
-    .logo-btn.active {
-      background: var(--primary);
-      color: white;
-    }
-    
-    /* Logo Fallback */
-    .logo-fallback {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      font-weight: 800;
-      font-size: 2.5rem;
-      text-align: center;
-      padding: 10px;
-    }
-    
-    .logo-text {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-top: 5px;
-    }
-    
-    .brand-info {
-      flex: 1;
-    }
-    
-    .brand-title {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: var(--space-sm);
-      background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.2;
-      transition: all 0.5s ease;
-    }
-    
-    .brand-description {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: var(--space-md);
-      transition: all 0.5s ease;
-    }
-    
-    .stats {
-      display: flex;
-      gap: var(--space-lg);
-      margin-top: var(--space-md);
-    }
-    
-    .stat-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    .stat-number {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 4px;
-      transition: all 0.5s ease;
-    }
-    
-    .stat-label {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      transition: all 0.5s ease;
-    }
-    
-    /* ===== LINKS GRID ===== */
-    .links-grid {
+    .hero{
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: var(--space-md);
-      margin-bottom: var(--space-xl);
+      grid-template-columns: 100px 1fr; /* تصغير اللوغو قليلاً */
+      gap: 16px;
+      padding: 20px;
+      align-items: center;
+      border-bottom: 1px solid var(--stroke); /* إضافة فاصل نظيف */
     }
-    
-    .link-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-lg);
-      transition: all var(--transition-normal);
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      display: block;
+    .logo{
+      width: 90px;
+      height: 90px;
+      border-radius: 20px;
+      background: var(--bg1);
+      border: 1px solid var(--stroke);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,.3);
     }
-    
-    .link-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
+    .logo img{
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      opacity: 0;
-      transition: opacity var(--transition-normal);
-      z-index: 0;
+      object-fit: cover;
+      display:block;
     }
-    
-    .link-card:hover {
-      transform: translateY(-8px);
-      border-color: var(--border-glow);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    .brand h1{
+      margin:0 0 4px;
+      font-size: 24px; /* تكبير الخط قليلاً */
+      font-weight: 800; /* جعل العنوان أكثر جرأة */
+      letter-spacing: .2px;
+      color: var(--accent); /* لون اللكنة (Accent) */
     }
-    
-    .link-card:hover::before {
-      opacity: 0.1;
-    }
-    
-    .card-content {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      gap: var(--space-md);
-    }
-    
-    .card-icon {
-      width: 60px;
-      height: 60px;
-      border-radius: var(--radius-md);
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      flex-shrink: 0;
-      transition: all var(--transition-normal);
-    }
-    
-    .link-card:hover .card-icon {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      transform: scale(1.1);
-      color: white;
-    }
-    
-    .card-text {
-      flex: 1;
-    }
-    
-    .card-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    
-    .card-arrow {
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      transition: transform var(--transition-normal);
-    }
-    
-    .link-card:hover .card-arrow {
-      transform: translateX(-5px);
-      color: var(--primary);
-    }
-    
-    .card-description {
-      font-size: 0.875rem;
-      color: var(--text-muted);
+    .brand p{
+      margin:0;
+      color:var(--muted);
+      font-size: 14px;
       line-height: 1.6;
     }
-    
-    /* Special card for menu */
-    .menu-card {
-      grid-column: 1 / -1;
-      background: linear-gradient(135deg, rgba(var(--primary-rgb, 139, 92, 246), 0.1), rgba(var(--secondary-rgb, 16, 185, 129), 0.05));
-      border: 1px solid rgba(var(--primary-rgb, 139, 92, 246), 0.2);
+    .links{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding: 20px; /* زيادة التباعد حول الروابط */
     }
-    
-    .menu-card .card-icon {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-    }
-    
-    /* ===== SOCIAL BAR ===== */
-    .social-bar {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-md);
-      margin-bottom: var(--space-lg);
-    }
-    
-    .social-title {
-      text-align: center;
-      font-size: 1rem;
-      color: var(--text-muted);
-      margin-bottom: var(--space-md);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-    
-    .social-icons {
-      display: flex;
-      justify-content: center;
-      gap: var(--space-md);
-    }
-    
-    .social-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: var(--radius-full);
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-primary);
-      font-size: 1.25rem;
-      transition: all var(--transition-normal);
-      text-decoration: none;
-    }
-    
-    .social-icon:hover {
-      transform: translateY(-4px);
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      color: white;
-    }
-    
-    /* ===== FOOTER ===== */
-    .main-footer {
-      text-align: center;
-      padding: var(--space-lg) 0;
-      border-top: 1px solid var(--border-light);
-      margin-top: var(--space-xl);
-    }
-    
-    .footer-text {
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      margin-bottom: var(--space-sm);
-    }
-    
-    .copyright {
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      opacity: 0.7;
-    }
-    
-    /* ===== ANIMATIONS ===== */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .animate-in {
-      animation: fadeInUp 0.6s ease forwards;
-    }
-    
-    .delay-1 { animation-delay: 0.1s; opacity: 0; }
-    .delay-2 { animation-delay: 0.2s; opacity: 0; }
-    .delay-3 { animation-delay: 0.3s; opacity: 0; }
-    .delay-4 { animation-delay: 0.4s; opacity: 0; }
-    .delay-5 { animation-delay: 0.5s; opacity: 0; }
-    
-    /* ===== UTILITY VARIABLES ===== */
-    :root {
-      --space-xs: 8px;
-      --space-sm: 16px;
-      --space-md: 24px;
-      --space-lg: 32px;
-      --space-xl: 48px;
-      --space-2xl: 64px;
-      
-      --radius-lg: 24px;
-      --radius-md: 16px;
-      --radius-sm: 12px;
-      --radius-full: 9999px;
-      
-      --transition-normal: 0.3s ease;
-      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.2);
-    }
-    
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      .container {
-        padding: var(--space-sm);
-      }
-      
-      .hero-content {
-        flex-direction: column;
-        text-align: center;
-        gap: var(--space-md);
-      }
-      
-      .stats {
-        justify-content: center;
-      }
-      
-      .links-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .brand-title {
-        font-size: 2rem;
-      }
-      
-      .logo-container {
-        width: 120px;
-        height: 120px;
-      }
-      
-      .theme-switcher {
-        top: 10px;
-        left: 10px;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .logo-card,
-      .link-card,
-      .social-bar {
-        padding: var(--space-md);
-      }
-      
-      .brand-title {
-        font-size: 1.75rem;
-      }
-      
-      .social-icons {
-        flex-wrap: wrap;
-      }
-      
-      .card-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 1.25rem;
-      }
-      
-      .logo-container {
-        width: 100px;
-        height: 100px;
-      }
-      
-      .logo-fallback {
-        font-size: 2rem;
-      }
-    }
-    
-    /* ===== LOGO UPLOAD ===== */
-    .logo-upload-container {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(10px);
-      z-index: 2000;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .logo-upload-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-lg);
-      max-width: 500px;
-      width: 90%;
-      box-shadow: var(--shadow-lg);
-    }
-    
-    .upload-header {
-      display: flex;
-      align-items: center;
+    .btn{
+      text-decoration:none;
+      color: var(--text);
+      border: 1px solid var(--stroke);
+      background: var(--bg1); /* جعل خلفية الزر أغمق من الخلفية الرئيسية لتمييزه */
+      padding: 14px 18px; /* زيادة حجم الزر */
+      border-radius: 10px; /* تقليل استدارة الزر */
+      display:flex;
+      align-items:center;
       justify-content: space-between;
-      margin-bottom: var(--space-md);
+      gap: 10px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
     }
-    
-    .upload-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-    }
-    
-    .upload-close {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      color: var(--text-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .upload-close:hover {
-      background: var(--primary);
-      color: white;
-    }
-    
-    .upload-options {
-      display: flex;
-      gap: var(--space-md);
-      margin-bottom: var(--space-lg);
-    }
-    
-    .upload-option {
-      flex: 1;
-      padding: var(--space-md);
-      border: 2px solid var(--border);
-      border-radius: var(--radius-md);
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .upload-option:hover {
-      border-color: var(--primary);
-      background: rgba(var(--primary-rgb, 139, 92, 246), 0.1);
-    }
-    
-    .upload-option.active {
-      border-color: var(--primary);
-      background: rgba(var(--primary-rgb, 139, 92, 246), 0.2);
-    }
-    
-    .upload-icon {
-      font-size: 2rem;
-      margin-bottom: var(--space-sm);
-      color: var(--primary);
-    }
-    
-    .upload-instructions {
-      background: var(--bg-surface);
-      border-radius: var(--radius-md);
-      padding: var(--space-md);
-      margin-bottom: var(--space-lg);
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-    
-    .upload-actions {
-      display: flex;
-      gap: var(--space-md);
-      justify-content: flex-end;
-    }
-    
-    .btn {
-      padding: var(--space-sm) var(--space-lg);
-      border: none;
-      border-radius: var(--radius-md);
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-    }
-    
-    .btn-secondary {
-      background: var(--bg-surface);
-      color: var(--text-primary);
-      border: 1px solid var(--border);
-    }
-    
-    .btn:hover {
+    .btn:hover{
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      background: var(--card);
+      border-color: var(--accent); /* إبراز الحدود بلون اللكنة عند التحويم */
+      box-shadow: 0 5px 15px rgba(0, 188, 212,.2);
     }
-  </style>
+    .left{
+      display:flex;
+      align-items:center;
+      gap: 14px; /* زيادة التباعد بين الأيقونة والنص */
+      min-width: 0;
+    }
+    .ico{
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex: 0 0 auto;
+      font-size: 18px;
+      background: var(--accent); /* أيقونة بارزة بلون اللكنة */
+      color: var(--bg1);
+      box-shadow: 0 2px 5px rgba(0,0,0,.3);
+    }
+    .label{
+      display:flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .label b{
+      font-size: 16px; /* تكبير خط العنوان */
+      font-weight: 700;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .label span{
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .arrow{ opacity:1; color: var(--accent); flex: 0 0 auto; font-weight: 700; }
+    .foot{
+      text-align:center;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 20px 4px 0;
+      opacity: .8;
+    }
+    .note{
+      margin-top: 15px;
+      padding: 12px 14px;
+      border: 1px solid var(--stroke);
+      background: var(--bg1);
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.8;
+      font-weight: 500;
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        grid-template-columns: 80px 1fr;
+        gap: 12px;
+        padding: 16px;
+      }
+      .logo {
+        width: 70px;
+        height: 70px;
+        border-radius: 16px;
+      }
+      .brand h1 {
+        font-size: 20px;
+      }
+      .ico {
+        width: 38px;
+        height: 38px;
+      }
+      .btn {
+        padding: 12px 16px;
+      }
+    }
+  </style>
 </head>
 
-<body class="theme-default">
-  <!-- Theme Switcher -->
-  <div class="theme-switcher">
-    <button class="theme-toggle" id="themeToggle">
-      <i class="fas fa-palette"></i>
-    </button>
-    <div class="theme-menu" id="themeMenu">
-      <div class="theme-option active" data-theme="default">
-        <div class="theme-color default"></div>
-        <span>الداكن العصري</span>
-      </div>
-      <div class="theme-option" data-theme="light">
-        <div class="theme-color light"></div>
-        <span>الفاتح النظيف</span>
-      </div>
-      <div class="theme-option" data-theme="gold">
-        <div class="theme-color gold"></div>
-        <span>الأسود والذهبي</span>
-      </div>
-      <div class="theme-option" data-theme="blue">
-        <div class="theme-color blue"></div>
-        <span>التدرج الأزرق</span>
-      </div>
-    </div>
-  </div>
+<body>
+  <div class="wrap">
 
-  <!-- Background Effects -->
-  <div class="bg-effects">
-    <div class="gradient-bg"></div>
-  </div>
+    <div class="top">
+      <div class="hero">
+        <div class="logo">
+          <img src="logo.jpg" alt="Five Slash Logo"
+               onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'color:rgba(241,241,245,.75);font-weight:700\'>LOGO</div>';">
+        </div>
 
-  <div class="container">
-    <!-- Header -->
-    <header class="main-header animate-in">
-      <div class="logo-card">
-        <div class="hero-content">
-          <!-- Logo Container -->
-          <div class="logo-container">
-            <div class="logo-circle">
-              <!-- Logo Image with Options -->
-              <img src="logo.jpg" alt="Five Slash Logo" class="logo-img contain" 
-                   id="logoImage"
-                   onerror="showLogoFallback()">
-              
-              <!-- Fallback Logo -->
-              <div class="logo-fallback" id="logoFallback" style="display: none;">
-                <div>5/</div>
-                <div class="logo-text">FIVE SLASH</div>
-              </div>
-            </div>
-            
-            <!-- Logo Controls -->
-            <div class="logo-controls">
-              <button class="logo-btn active" data-fit="contain" title="تغيير حجم الصورة">
-                <i class="fas fa-expand-alt"></i>
-              </button>
-              <button class="logo-btn" data-fit="cover" title="تغطية كاملة">
-                <i class="fas fa-crop-alt"></i>
-              </button>
-              <button class="logo-btn" data-fit="none" title="الحجم الأصلي">
-                <i class="fas fa-vector-square"></i>
-              </button>
-              <button class="logo-btn" id="uploadLogoBtn" title="رفع صورة جديدة">
-                <i class="fas fa-upload"></i>
-              </button>
-            </div>
-          </div>
-          
-          <!-- Brand Info -->
-          <div class="brand-info">
-            <h1 class="brand-title">Five Slash</h1>
-            <p class="brand-description">
-              وجهتك الأولى لأجواء استثنائية وقهوة مميزة. افتح المنيو، تابعنا على وسائل التواصل، وزرنا في موقعنا المميز.
-            </p>
-            
-            <div class="stats">
-              <div class="stat-item">
-                <span class="stat-number">24/7</span>
-                <span class="stat-label">متاحون لك</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">50+</span>
-                <span class="stat-label">مشروب مميز</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">⭐ 4.9</span>
-                <span class="stat-label">تقييم العملاء</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
+        <div class="brand">
+          <h1>Five Slash</h1>
+          <p>افتح المنيو، تابعنا، ووصلنا بسهولة.</p>
+        </div>
+      </div>
 
-    <!-- Main Links -->
-    <main class="links-grid">
-      <!-- Menu Card -->
-      <a href="http://185.193.17.193/five-slash-menu/index.php?key=FIVE2025" 
-         target="_blank" 
-         rel="noopener noreferrer"
-         class="link-card menu-card animate-in delay-1">
-        <div class="card-content">
-          <div class="card-icon">
-            <i class="fas fa-coffee"></i>
-          </div>
-          <div class="card-text">
-            <div class="card-title">
-              قائمة الطعام والمشروبات
-              <span class="card-arrow"><i class="fas fa-arrow-left"></i></span>
-            </div>
-            <p class="card-description">
-              استعرض قائمتنا الكاملة من المشروبات الساخنة والباردة، الحلويات، والأطباق المميزة. اطلب بسهولة عبر QR Code
-            </p>
-          </div>
-        </div>
-      </a>
+      <div class="links">
+                <a class="btn" href="http://185.193.17.193/five-slash-menu/index.php?key=FIVE2025" target="_blank" rel="noopener">
+          <span class="left">
+            <span class="ico">☕</span>
+            <span class="label">
+              <b>Menu</b>
+              <span>فتح القائمة</span>
+            </span>
+          </span>
+          <span class="arrow">↗</span>
+        </a>
 
-      <!-- Location Card -->
-      <a href="https://maps.app.goo.gl/7Gqx9Bhf5zLsPdoG7" 
-         target="_blank" 
-         rel="noopener noreferrer"
-         class="link-card animate-in delay-2">
-        <div class="card-content">
-          <div class="card-icon">
-            <i class="fas fa-map-marker-alt"></i>
-          </div>
-          <div class="card-text">
-            <div class="card-title">
-              موقعنا على الخريطة
-              <span class="card-arrow"><i class="fas fa-arrow-left"></i></span>
-            </div>
-            <p class="card-description">
-              افتح موقعنا على خرائط جوجل، احصل على الاتجاهات، واعرف أقرب طريق للوصول إلينا
-            </p>
-          </div>
-        </div>
-      </a>
+                <a class="btn" href="https://maps.app.goo.gl/7Gqx9Bhf5zLsPdoG7" target="_blank" rel="noopener">
+          <span class="left">
+            <span class="ico">📍</span>
+            <span class="label">
+              <b>Location</b>
+              <span>فتح الموقع على Google Maps</span>
+            </span>
+            </span>
+          <span class="arrow">↗</span>
+        </a>
 
-      <!-- TikTok Card -->
-      <a href="https://www.tiktok.com/@five.slash5" 
-         target="_blank" 
-         rel="noopener noreferrer"
-         class="link-card animate-in delay-3">
-        <div class="card-content">
-          <div class="card-icon">
-            <i class="fab fa-tiktok"></i>
-          </div>
-          <div class="card-text">
-            <div class="card-title">
-              تيك توك
-              <span class="card-arrow"><i class="fas fa-arrow-left"></i></span>
-            </div>
-            <p class="card-description">
-              تابعنا على تيك توك لمقاطع فيديو حصرية، عروض خاصة، ووراء الكواليس @five.slash5
-            </p>
-          </div>
-        </div>
-      </a>
+                <a class="btn" href="https://www.tiktok.com/@five.slash5?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">
+          <span class="left">
+            <span class="ico">🎵</span>
+            <span class="label">
+              <b>TikTok</b>
+              <span>@five.slash5</span>
+            </span>
+          </span>
+          <span class="arrow">↗</span>
+        </a>
 
-      <!-- Instagram Card -->
-      <a href="#" 
-         onclick="event.preventDefault(); showComingSoon('Instagram');"
-         class="link-card animate-in delay-4">
-        <div class="card-content">
-          <div class="card-icon">
-            <i class="fab fa-instagram"></i>
-          </div>
-          <div class="card-text">
-            <div class="card-title">
-              إنستجرام
-              <span class="card-arrow"><i class="fas fa-arrow-left"></i></span>
-            </div>
-            <p class="card-description">
-              قريباً على إنستجرام. تابعنا لصور حصرية، قصص يومية، وعروض خاصة
-            </p>
-          </div>
-        </div>
-      </a>
+                <div class="note">
+          ملاحظة: هذه الصفحة ثابتة وآمنة (Static). لا يمكن لأي أحد تعديلها إلا من يملك حساب GitHub/الاستضافة.
+        </div>
+      </div>
+    </div>
 
-      <!-- WhatsApp Card -->
-      <a href="#" 
-         onclick="event.preventDefault(); openWhatsApp();"
-         class="link-card animate-in delay-5">
-        <div class="card-content">
-          <div class="card-icon">
-            <i class="fab fa-whatsapp"></i>
-          </div>
-          <div class="card-text">
-            <div class="card-title">
-              تواصل معنا
-              <span class="card-arrow"><i class="fas fa-arrow-left"></i></span>
-            </div>
-            <p class="card-description">
-              للاستفسارات، الحجوزات، أو أي مساعدة. اضغط هنا للتواصل معنا عبر واتساب
-            </p>
-          </div>
-        </div>
-      </a>
-    </main>
+    <div class="foot">© <span id="y"></span> Five Slash</div>
+  </div>
 
-    <!-- Social Bar -->
-    <div class="social-bar animate-in delay-4">
-      <h3 class="social-title
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
